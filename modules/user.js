@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const validator=require("validator");
-mongoose.connect('mongodb://localhost:27017/pms', {useNewUrlParser: true, useCreateIndex: true,useUnifiedTopology:true});
+mongoose.connect('mongodb+srv://mongodb:Arun1117@cluster0.spwl1.mongodb.net/pms?retryWrites=true&w=majority', {useNewUrlParser: true, useCreateIndex: true,useUnifiedTopology:true});
 
 var conn =mongoose.Collection;
 var userSchema =new mongoose.Schema({

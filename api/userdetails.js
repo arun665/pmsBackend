@@ -40,15 +40,15 @@ var Password=req.body.password;
 
 userModel.findOne({username:username,password:Password},function(err,user){    
 
-    if(user.length<1){
+    if(user){
         res.json({
-            message:"this user does not exist"
+            message:"user registered successfully"
         })
     }
     else{
 
         res.json({
-            message:"user registered successfully"
+            message:"this user does not exist"
         })
         }
 

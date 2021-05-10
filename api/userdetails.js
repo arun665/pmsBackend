@@ -35,63 +35,29 @@ router.get("/getdata",function(req,res,next){
 
 router.post("/signin",function(req,res,next){
 var username=req.body.username;
-var password=req.body.password;
-userModel.find({username:username})
-.exec()
-.then(user=>{
+var Password=req.body.password;
+
+
+userModel.findOne({username:username,password:Password},function(err,user){    
+
     if(user.length<1){
         res.json({
-            message:"User does not exist",
-            user:user
-        
+            message:"this user does not exist"
         })
-           
     }
     else{
 
-        bcrypt.compare(req.body.password, user[0].password, function(err, result) {
-            // result == true
-        if(err){
-            res.status(404).json({
-                message:"error in password"
-            })
+        res.json({
+            message:"user registered successfully"
+        })
         }
 
-        if(result){
-
-          var token=  jwt.sign({
-username:user[0].username,
-
-         } ,
-            'secret' , {
-                expiresIn:"8h"
-            } 
-            );
-
-
-
-    res.status(201).json({
-        message:"User founde",
-        user:user,
-        token:token
     
-    })
-        }
-        else{
-            res.json({
-                message:"Password is Wrong"
-            })
-        }
 
-        
+
+})
+
 });
-}
-})
-.catch(err=>{
-    res.json({error:err});
-})
-
-})
 
 
 router.post("/signup",function(req,res,next){

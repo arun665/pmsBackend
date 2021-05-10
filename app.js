@@ -61,6 +61,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+
+app.listen(5000 || process.env.port);
+
 
 

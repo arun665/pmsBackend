@@ -3,8 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var cors = require('cors')
+var cors = require('cors');
 
+ 
 var PassCatApi=require("./api/addcategory.js");
 var ProductApi=require("./api/Productdetails.js");
 var UserApi=require("./api/userdetails.js");
@@ -36,20 +37,18 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use("/api",PassCatApi);
-app.use("/productapi",ProductApi);
 app.use("/userapi/",UserApi);
 
 
 
-
-app.get("/",function(req,res,next){
-  res.send("running success");
+app.get('/', function (req, res) {
+  res.send('Hello World')
 })
 // catch 404 and forward to error handler
 
 // error handler
 
-app.listen(5000 || process.env.port);
-
-
+app.listen(process.env.PORT || 5000,function(err){
+  console.log("running on port 5000");
+});
 

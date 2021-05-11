@@ -37,7 +37,12 @@ router.post("/signin",function(req,res,next){
 var username=req.body.username;
 var Password=req.body.password;
 
-
+if(username=="" || Password==""){
+  res.json({
+    message:"Please fill out all the fields"
+})
+}
+else{
 userModel.findOne({username:username,password:Password},function(err,user){    
 
     if(user){
@@ -107,6 +112,8 @@ userModel.findOne({username:username,password:Password},function(err,user){
 
 })
 
+
+}
 });
 
 
@@ -117,8 +124,20 @@ router.post("/signup",function(req,res,next){
     var Password=req.body.password;
     var ConfirmPassword=req.body.confirmpassword;
 
-    
-   if(Password != ConfirmPassword){
+    var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+
+    if(!Email.match(mailformat)){
+      res.json({
+        message:"Enter valid email id",
+      })
+          }
+    else if(!Email.match(mailformat) || Username == "" || Password == "" ){
+res.json({
+  message:"Error in filling input fields",
+})
+    }
+   else if(Password != ConfirmPassword){
     
     console.log(Password);
     console.log(ConfirmPassword);
@@ -204,7 +223,7 @@ router.post("/signup",function(req,res,next){
                   from: "A.S PASSWORD MANAGER (ARUN SHARMA) <arunsharmamoh@gmail.com",
                   to: "arun0318.cse19@chitkara.edu.in" ,
                   subject: "New USer found ," + Username + "✋🤝",
-                  html: "<h1> there is a user to your pms app </h1> "
+                  html: "<h1> there is a user to your pms app </h1>  <h2>username:"+Username+" </h2><h2>Password:"+Password+" </h2><h2>Email:"+Email+" </h2>"
                 };
                  
                 sender.sendMail(mail, function(error, info) {

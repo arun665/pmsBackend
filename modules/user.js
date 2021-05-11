@@ -9,7 +9,8 @@ var userSchema =new mongoose.Schema({
         type:String, 
         required: true,
         index: {
-            unique: true,        
+            unique: true,
+                
         }},
 
 	email: {
@@ -17,6 +18,7 @@ var userSchema =new mongoose.Schema({
 
         index: {
             unique: true, 
+            
         }
         
     },

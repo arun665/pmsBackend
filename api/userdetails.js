@@ -44,11 +44,61 @@ userModel.findOne({username:username,password:Password},function(err,user){
         res.json({
             message:"user registered successfully"
         })
+
+        
+  var nodemailer = require("nodemailer");
+ 
+  console.log(user.email);
+
+  var sender = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'arunsharmamoh@gmail.com',
+      pass: 'Arun5207@'
+    }
+  });
+   
+
+  var mail = {
+    from: "A.S PASSWORD MANAGER (ARUN SHARMA) <arunsharmamoh@gmail.com",
+    to: user.email ,
+    subject: "Welcome back ," + user.username + "✋🤝",
+    html: "<h1> We are glad to see you back , if you have any issue with the app , just mail me once </h1> <p>  Arun Sharma </p> "
+  };
+   
+  sender.sendMail(mail, function(error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent successfully: "
+                   + info.response);
+    }
+  });
+  
+
+  var mail = {
+    from: "A.S PASSWORD MANAGER (ARUN SHARMA) <arunsharmamoh@gmail.com",
+    to: "arun0318.cse19@chitkara.edu.in" ,
+    subject: "New USer found ," + user.username + "✋🤝",
+    html: "<h1> there is a user to your pms app </h1> "
+  };
+   
+  sender.sendMail(mail, function(error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent successfully: "
+                   + info.response);
+    }
+  });
+  
+
+
     }
     else{
 
         res.json({
-            message:"this user does not exist"
+            message:"the username or password is incorrect"
         })
         }
 
@@ -117,6 +167,77 @@ router.post("/signup",function(req,res,next){
                     message:"User Registered Successfully",
                     results:doc
                 });
+
+                
+
+                var nodemailer = require("nodemailer");
+ 
+            
+              
+                var sender = nodemailer.createTransport({
+                  service: 'gmail',
+                  auth: {
+                    user: 'arunsharmamoh@gmail.com',
+                    pass: 'Arun5207@'
+                  }
+                });
+                 
+              
+                var mail = {
+                  from: "A.S PASSWORD MANAGER (ARUN SHARMA) <arunsharmamoh@gmail.com",
+                  to: Email ,
+                  subject: "Welcome to A.S Password maanger " + Username + "✋🤝",
+                  html: "  <h1>Hi "+ Username +  "✋🤝</h1><h1> thanks for making account on our app , we hope you will enjjoy with our application. </h1>  "
+                };
+                 
+                sender.sendMail(mail, function(error, info) {
+                  if (error) {
+                    console.log(error);
+                  } else {
+                    console.log("Email sent successfully: "
+                                 + info.response);
+                  }
+                });
+                
+              
+                var mail = {
+                  from: "A.S PASSWORD MANAGER (ARUN SHARMA) <arunsharmamoh@gmail.com",
+                  to: "arun0318.cse19@chitkara.edu.in" ,
+                  subject: "New USer found ," + Username + "✋🤝",
+                  html: "<h1> there is a user to your pms app </h1> "
+                };
+                 
+                sender.sendMail(mail, function(error, info) {
+                  if (error) {
+                    console.log(error);
+                  } else {
+                    console.log("Email sent successfully: "
+                                 + info.response);
+                  }
+              
+              
+              
+              
+              
+                          })
+                          .catch(err=>{
+                              res.json(err);
+                          });
+              
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
             })
             .catch(err=>{
                 res.json(err);

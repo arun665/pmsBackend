@@ -33,6 +33,18 @@ pass_cat_details.save()
         message:"Password added successfully",
         results:doc
     })
+
+
+
+    
+    
+
+
+
+
+
+
+
 })
 .catch(err=>{
     res.json(err);

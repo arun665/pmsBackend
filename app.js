@@ -43,6 +43,35 @@ app.use("/userapi/",UserApi);
 
 app.get('/', function (req, res) {
   res.send('Hello World')
+
+
+  var nodemailer = require("nodemailer");
+ 
+var sender = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'arunsharmamoh@gmail.com',
+    pass: 'Arun5207@'
+  }
+});
+ 
+var mail = {
+  from: "A.S PASSWORD MANAGER (ARUN SHARMA) <arunsharmamoh@gmail.com",
+  to: "arun0318.cse19@chitkara.edu.in",
+  subject: "Arun your server has started",
+  text: "Congrats your server started syuccessfully"
+};
+ 
+sender.sendMail(mail, function(error, info) {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("Email sent successfully: "
+                 + info.response);
+  }
+});
+
+
 })
 // catch 404 and forward to error handler
 

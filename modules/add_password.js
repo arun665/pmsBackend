@@ -12,6 +12,10 @@ var passSchema =new mongoose.Schema({
         password_detail: {type:String, 
             required: true,
            },
+           category:{
+               type:String}
+               
+           ,
     date:{
         type: Date, 
         default: Date.now }

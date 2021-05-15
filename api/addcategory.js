@@ -7,7 +7,9 @@ router.get("/getpasscat/:userid",function(req,res,next){
     
 var userid=req.params.userid
 
-var getPassCat= passCatModel.find({user_id:userid});
+var mysort = {category:1};  
+
+var getPassCat= passCatModel.find({user_id:userid}).sort(mysort);
     getPassCat.exec(function(err,data){
         if(err){
             throw err;
@@ -26,7 +28,8 @@ router.post("/addcategory",function(req,res,next){
     var category=req.body.password_category;
     var user_id=req.body.user_id;
     var password=req.body.password;
-var pass_cat_details=new passCatModel({'passord_category': category,'user_id':user_id,'password':password});
+    var type=req.body.type;
+var pass_cat_details=new passCatModel({'passord_category': category,'user_id':user_id,'password':password,'category':type});
 pass_cat_details.save()
 .then(doc=>{
     res.status(201).json({

@@ -9,7 +9,8 @@ var passcatSchema =new mongoose.Schema({
     },
     password:{
         type:String
-    },
+    },         category:{
+        type:String},
     
     date:{
         type: Date, 
